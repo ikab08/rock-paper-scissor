@@ -1,0 +1,35 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 18px;
+}
+
+section {
+    width:50%; 
+    margin: auto; 
+    text-align: center; 
+    padding-top: 50px;
+}
+
+.btn-div {
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
+    /* background-color: #3882f6;
+    color: white; */
+    margin-top: 10px;
+    border-radius: 8px;
+    padding: 5px 20px;
+    cursor: pointer;
+}
+
+.score {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
