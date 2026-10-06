@@ -72,60 +72,6 @@ function playRound(humanChoice){
         
 }
 
-rockBtn.addEventListener("click", ()=> playRound(rockBtn.value))
-paperBtn.addEventListener("click", ()=> playRound(paperBtn.value))
-scissorsBtn.addEventListener("click", ()=> playRound(scissorsBtn.value))
-
-
-
-// function playGame() {
-
-//     function playRound(humanChoice, computerChoice){
-//         humanChoice = humanChoice.toUpperCase();
-//         computerChoice = computerChoice.toUpperCase();
-//         let result;
-//         if (humanChoice === computerChoice) {
-//             result = "Nobody win! Same choice"
-//         } else {
-//             if (humanChoice == "ROCK" && computerChoice == "PAPER") {
-//                 result = "You loose! Paper beats Rock";
-//                 computerScore++;
-//             } else if (humanChoice == "ROCK" && computerChoice == "SCISSORS") {
-//                 result = "You win! Rock beats Scissors"
-//                 humanScore++;
-//             }else if (humanChoice == "PAPER" && computerChoice == "ROCK") {
-//                 result = "You win! Paper beats Rock";
-//                 humanScore++;
-//             } else if (humanChoice == "PAPER" && computerChoice == "SCISSORS") {
-//                 result = "You loose! Scissors beats paper"
-//                 computerScore++;
-//             }
-//             if (humanChoice == "SCISSORS" && computerChoice == "PAPER") {
-//                 result = "You win! Scissors beats paper";
-//                 humanScore++;
-//             } else if (humanChoice == "SCISSORS" && computerChoice == "ROCK") {
-//                 result = "You loose! Rock beats Scissors"
-//                 computerScore++;
-//             }
-//         }
-//         // return result;
-//         console.log(result);
-//     }
-
-//     for (let i = 0; i < 5; i++) {
-        
-//         playRound(humanSelection, computerSelection);
-//         console.log(`${i} / YOU : ${humanScore} - Computer ${computerScore}`);
-//     }
-
-//     if (humanScore > computerScore) {
-//         console.log("Congrats YOU WIN");
-//     } else if (humanScore < computerScore) {
-//         console.log("Sorry YOU Loose");
-//     } else {
-//         console.log("It's tie")
-//     }
-    
-// }
-
-//playGame();
+rockBtn.addEventListener("click", ()=> playRound(rockBtn.value));
+paperBtn.addEventListener("click", ()=> playRound(paperBtn.value));
+scissorsBtn.addEventListener("click", ()=> playRound(scissorsBtn.value));
