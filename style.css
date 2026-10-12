@@ -39,6 +39,11 @@ button:hover:not(:disabled) {
     color: #fff;
 }
 
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 .score {
     padding: 10px;
     display: flex;

@@ -44,17 +44,32 @@ function updateScores() {
     computerDisplayScore.textContent = `Computer : ${computerScore}`;
 }
 
+function setAttriuteButton(mode){
+    if (mode === "reset") {
+        playBtn.hidden = true;
+        rockBtn.disabled = false;
+        paperBtn.disabled = false;
+        scissorsBtn.disabled = false;
+    } else {
+        playBtn.removeAttribute("hidden");
+        rockBtn.disabled = true;
+        paperBtn.disabled = true;
+        scissorsBtn.disabled = true;
+    }
+        
+}
+
 function chekGameOver() {
     if (humanScore == 5) {
-        roundResult.className = "win";
+        roundResult.classList.add('win');
         roundResult.textContent = "Congrats YOU WIN this game";
         gameOver = true;
-        playBtn.removeAttribute("hidden");
+        setAttriuteButton("");
     } else if (computerScore == 5) {
-        roundResult.className= "lose";
+        roundResult.classList.add('lose');
         roundResult.textContent = "Sorry YOU Lose this game";
         gameOver = true;
-        playBtn.removeAttribute("hidden");
+        setAttriuteButton("");
     } 
 }
 
@@ -81,9 +96,10 @@ function resetGame(){
     humanScore = 0;
     computerScore = 0;
     gameOver = false;
-    playBtn.hidden = true;
+    setAttriuteButton('reset');
     updateScores();
     showResult();
+    roundResult.classList.remove('win', 'lose');
 }
 rockBtn.addEventListener("click", ()=> playRound(rockBtn.value));
 paperBtn.addEventListener("click", ()=> playRound(paperBtn.value));
