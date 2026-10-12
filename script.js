@@ -1,77 +1,92 @@
 let humanScore = 0;
 let computerScore = 0;
+let gameOver = false;
 
-rockBtn = document.querySelector("#rock");
-paperBtn = document.querySelector("#paper");
-scissorsBtn = document.querySelector("#scissors");
+const rockBtn = document.querySelector("#rock");
+const paperBtn = document.querySelector("#paper");
+const scissorsBtn = document.querySelector("#scissors");
+const playBtn = document.querySelector("#playAgain");
+const roundResult = document.querySelector("#roundResult");
+const playerDisplayScore = document.querySelector("#playerScore");
+const computerDisplayScore = document.querySelector("#computerScore");
 
-roundResult = document.querySelector("#roundResult");
-player = document.querySelector("#playerScore");
-computer = document.querySelector("#computerScore");
+
+const choices = ["rock", "paper", "scissors"];
 
 
 function getComputerChoice() {
-    let randomNumber = Math.random();
-    let computerChoice;
-    if (randomNumber < 0.3) {
-        computerChoice = "Rock";
-    } else if (randomNumber <= 0.6) {
-        computerChoice = "Paper";
-    } else {
-        computerChoice = "Scissors";
+    return choices[Math.floor(Math.random() * choices.length)];
+}
+
+function showResult(result, humanChoice, computerChoice) {
+    let message="";
+    switch (result) {
+        case "draw":
+            message = `Same choice ${humanChoice}`;
+            break;
+        case "beat":
+            humanScore++;
+            message = `You win!  ${humanChoice} beats ${computerChoice}`;
+            break;
+        case "nobeat":
+            computerScore++;
+            message = `You loose!  ${computerChoice} beats ${humanChoice}`;
+            break;
+        default:
+            message = "";
+            break;
     }
-    return computerChoice;
+    roundResult.textContent = message;
+}
+
+function updateScores() {
+    playerDisplayScore.textContent = `You : ${humanScore}`;
+    computerDisplayScore.textContent = `Computer : ${computerScore}`;
+}
+
+function chekGameOver() {
+    if (humanScore == 5) {
+        roundResult.className = "win";
+        roundResult.textContent = "Congrats YOU WIN this game";
+        gameOver = true;
+        playBtn.removeAttribute("hidden");
+    } else if (computerScore == 5) {
+        roundResult.className= "lose";
+        roundResult.textContent = "Sorry YOU Lose this game";
+        gameOver = true;
+        playBtn.removeAttribute("hidden");
+    } 
 }
 
 function playRound(humanChoice){
-        humanChoice = humanChoice.toUpperCase();
-        let computerChoice = getComputerChoice().toUpperCase();
-        let result;
-        if (humanChoice === computerChoice) {
-            result = "Same choice !"
-        } else {
-            if (humanChoice == "ROCK" && computerChoice == "PAPER") {
-                result = "Paper beats Rock";
-                computerScore++;
-            } else if (humanChoice == "ROCK" && computerChoice == "SCISSORS") {
-                result = "Rock beats Scissors"
-                humanScore++;
-            }else if (humanChoice == "PAPER" && computerChoice == "ROCK") {
-                result = "Paper beats Rock";
-                humanScore++;
-            } else if (humanChoice == "PAPER" && computerChoice == "SCISSORS") {
-                result = "Scissors beats paper"
-                computerScore++;
-            }
-            if (humanChoice == "SCISSORS" && computerChoice == "PAPER") {
-                result = "Scissors beats paper";
-                humanScore++;
-            } else if (humanChoice == "SCISSORS" && computerChoice == "ROCK") {
-                result = "Rock beats Scissors"
-                computerScore++;
-            }
-        }
-        // return result;
-        // console.log(result);
-            roundResult.style.color = "black";
-            roundResult.innerHTML = result;
-            player.innerHTML = 'You : '+humanScore;
-            computer.innerHTML = 'Computer : '+computerScore;
-        if (humanScore == 5) {
-            roundResult.style.color = "green";
-            roundResult.innerHTML = "Congrats YOU WIN this game";
-            humanScore = 0;
-            computerScore = 0;
-        } else if (computerScore == 5) {
-            roundResult.style.color = "red";
-            roundResult.innerHTML = "Sorry YOU Loose this game";
-            humanScore = 0;
-            computerScore = 0;
-        } 
+    if (gameOver) return;
 
-        
+    const computerChoice = getComputerChoice();
+    let result;
+
+    if (humanChoice === computerChoice) {
+        result = "draw";
+    } else {
+        result = (humanChoice == "rock" && computerChoice === "scissors")
+        || (humanChoice == "paper" && computerChoice === "rock" ) 
+        || (humanChoice == "scissors" && computerChoice === "paper" ) ? "beat" : "nobeat" ;
+    }
+    
+    showResult(result, humanChoice, computerChoice);
+    updateScores();
+    chekGameOver();
 }
 
+function resetGame(){
+    humanScore = 0;
+    computerScore = 0;
+    gameOver = false;
+    playBtn.hidden = true;
+    updateScores();
+    showResult();
+}
 rockBtn.addEventListener("click", ()=> playRound(rockBtn.value));
 paperBtn.addEventListener("click", ()=> playRound(paperBtn.value));
 scissorsBtn.addEventListener("click", ()=> playRound(scissorsBtn.value));
+
+playBtn.addEventListener("click", resetGame);
